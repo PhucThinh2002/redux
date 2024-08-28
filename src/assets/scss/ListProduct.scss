@@ -1,0 +1,93 @@
+.list-product {
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      margin-bottom: 20px;
+  
+      span {
+        font-size: 18px;
+        color: #000;
+      }
+  
+      .btn-new-product {
+        background-color: #e68a00;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+  
+        &:hover {
+          background-color: #ff9800;
+        }
+      }
+    }
+  
+    .search-bar {
+      display: flex;
+      margin-bottom: 20px;
+  
+      input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 10px;
+      }
+  
+      .btn-search {
+        background-color: #ff9800;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+  
+        &:hover {
+          background-color: #e68a00;
+        }
+      }
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;  // Ensures borders are visible and continuous
+      border: 1px solid #ddd;     // Adds an outer border to the table
+  
+      th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;  // Only horizontal borders
+        text-align: left;
+      }
+  
+      th {
+        background-color: #f4f4f4;
+      }
+  
+      img {
+        border-radius: 4px;
+      }
+  
+      tfoot {
+        background-color: #f4f4f4;
+      }
+    }
+  
+    .btn-action {
+      background-color: #ff9800;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 5px;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: #e68a00;
+      }
+    }
+  }
+  
