@@ -6,18 +6,25 @@ import ProductLayoutComponent from "./ProductManagement/ProductLayoutComponent";
 import ListProduct from "./ProductManagement/ListProduct";
 import CreateProductComponent from "./ProductManagement/CreateProductComponent";
 import UpdateProductComponent from "./ProductManagement/UpdateProductComponent";
+import HomePageMaster from "./MasterPage/HomePageMaster";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="form" element={<ReactForm/>}></Route>
-        <Route path="vitien" element={<ViTien/>}></Route>
+        <Route path='' element={<HomePageMaster/>}>
+          <Route index element={<HomePage />}></Route>
+          <Route path="form" element={<ReactForm/>}></Route>
+          <Route path="vitien" element={<ViTien/>}></Route>
+        </Route>
 
-        <Route path="/product-management" element={<ProductLayoutComponent />}>
+        <Route path="admin" element={<ProductLayoutComponent />}>
           <Route index element={<ListProduct />} />
           <Route path="create-product" element={<CreateProductComponent />} />
-          <Route path="update-product" element={<UpdateProductComponent />} />
+          <Route path="update-product">
+            <Route path=':id' element={<UpdateProductComponent/>}></Route>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

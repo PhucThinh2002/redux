@@ -1,54 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/scss/ListProduct.scss";
-import { Navigate, useNavigate } from "react-router-dom";
-
-const products = [
-  {
-    id: 123,
-    name: "Product 1",
-    price: 4990,
-    type: "A",
-    img: "https://picsum.photos/id/1/200/200",
-  },
-  {
-    id: 456,
-    name: "Product 2",
-    price: 3990,
-    type: "B",
-    img: "https://picsum.photos/id/2/200/200",
-  },
-  {
-    id: 789,
-    name: "Product 3",
-    price: 2990,
-    type: "C",
-    img: "https://picsum.photos/id/3/200/200",
-  },
-];
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 const ListProduct = () => {
-    const navigate = useNavigate();
+  const [arrProduct, setArrProduct] = useState([]);
+  const [search, setSearch] = useSearchParams('');
+  const kw = search.get('prodName');
+  
+  const handleChange = (e) => {
+    setSearch({
+      prodName:e.target.value
+    })
+  }
 
-    const handleNewProduct = () => {
-    navigate("/product-management/create-product");
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
 
-    // const handleEdit = (productId) => {
-    //     navigate(`/product-management/update-product/${productId}`)
-    // }
-    const handleEdit = () => {
-        navigate("/product-management/update-product")
+  const getAllProductApi = async () =>{
+    let url = '';
+    if(kw){
+      url=`https://apitraining.cybersoft.edu.vn/api/ProductApi/getall?keyword=${kw}`
+    }else{
+      url=`https://apitraining.cybersoft.edu.vn/api/ProductApi/getall`
     }
+    const res = await fetch(url)
+    const data = await res.json();
+    setArrProduct(data);
+    console.log(data)
+  }
+  useEffect(() => {
+    getAllProductApi();
+  },[kw])
   return (
     <div className="list-product">
       <div className="header">
         <span>Product &gt; List</span>
-        <button className="btn-new-product" onClick={handleNewProduct}>New Product</button>
+        <NavLink to={'./create-product'} className="btn-new-product text-decoration-none">New Product</NavLink>
       </div>
-      <div className="search-bar">
-        <input type="text" placeholder="Search products" />
-        <button className="btn-search">Search</button>
-      </div>
+      <form className="search-bar" onSubmit={handleSubmit}>
+        <input type="text" placeholder="Search products" onInput={handleChange}/>
+        <button className="btn-search" type={"submit"}>Search</button>
+      </form>
       <table>
         <thead>
           <tr>
@@ -63,20 +57,27 @@ const ListProduct = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
+          {arrProduct.map((item) => (
+            <tr key={item.id}>
               <td>
                 <input type="checkbox" />
               </td>
-              <td>{product.name}</td>
+              <td>{item.name}</td>
               <td>
-                <img src={product.img} alt={product.name} width="50" />
+                <img src={item.img} alt={item.name} width="50" />
               </td>
-              <td>{product.price}</td>
-              <td>{product.type}</td>
+              <td>{item.price}</td>
+              <td>{item.type}</td>
               <td>
-                <button className="btn-action" onClick={handleEdit}>Edit</button>
-                <button className="btn-action">Delete</button>
+                <NavLink to={`./update-product/${item.id}`} className="btn btn-sm btn-action">Edit</NavLink>
+                <button className="btn-action" onClick={async (e) =>{
+                  if(window.confirm('Bạn có muốn xóa không ?')){
+                    //api xóa
+                    const res = await axios.delete(`https://apitraining.cybersoft.edu.vn/api/ProductApi/delete/${item.id}`);
+                    //sau khi xóa thành công thì load lại api get all product
+                    getAllProductApi();
+                  }
+                }}>Delete</button>
                 <button className="btn-action">View detail</button>
               </td>
             </tr>
@@ -84,10 +85,10 @@ const ListProduct = () => {
         </tbody>
         <tfoot>
           <tr>
-          <td colSpan="6">
+            <td colSpan="6">
               <div className="d-flex justify-content-between align-items-center p-2">
                 <span className="results">
-                  Showing 1 to {products.length} of {products.length} results
+                  Showing 1 to {arrProduct.length} of {arrProduct.length} results
                 </span>
                 <span className="per-page">
                   Per page: 10 <i className="fa fa-angle-down"></i>
