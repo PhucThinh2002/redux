@@ -8,6 +8,7 @@ import CreateProductComponent from "./ProductManagement/CreateProductComponent";
 import UpdateProductComponent from "./ProductManagement/UpdateProductComponent";
 import HomePageMaster from "./MasterPage/HomePageMaster";
 import HomePage from "./pages/HomePage";
+import Crypto from "./Crypto/Crypto";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="update-product">
             <Route path=':id' element={<UpdateProductComponent/>}></Route>
           </Route>
+          <Route path="crypto" element={<Crypto/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
