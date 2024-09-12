@@ -10,6 +10,7 @@ const ProductLayoutComponent = () => {
           <ul className='nav'>
             <h3><i className="fa fa-home"></i> DashBoard</h3>
             <li>
+              <NavLink to="/" className="link my-2">Home</NavLink>
               <NavLink to="/admin" className="link">Products</NavLink>
             </li>
           </ul>

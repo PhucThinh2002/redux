@@ -8,6 +8,7 @@ const HeaderMenu = () => {
         <NavLink to="" className={(props) => props.isActive ? 'mx-2 bg-white text-dark p-3 text-decoration-none' :'mx-2 text-white link'}>Home</NavLink>
         <NavLink to="/form" className={(props) => (props.isActive ? 'mx-2 bg-white text-dark p-3 text-decoration-none' :'mx-2 text-white link')}>Form</NavLink>
         <NavLink to="/ViTien" className={(props) => (props.isActive ? 'mx-2 bg-white text-dark p-3 text-decoration-none' :'mx-2 text-white link')}>ViTien</NavLink>
+        <NavLink to="/admin" className={(props) => (props.isActive ? 'mx-2 bg-white text-dark p-3 text-decoration-none' :'mx-2 text-white link')}>Admin</NavLink>
         <NavLink to="/admin/crypto" className={(props) => (props.isActive ? 'mx-2 bg-white text-dark p-3 text-decoration-none' :'mx-2 text-white link')}>Crypto</NavLink>
       </nav>
     </header>
